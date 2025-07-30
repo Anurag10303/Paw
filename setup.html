@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet Profile Setup</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Custom Tailwind configuration for brand colors
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#8B5CF6", // Purple color for primary elements
+              secondary: "#06B6D4", // Cyan color for secondary elements
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gradient-to-br from-purple-50 to-cyan-50 min-h-screen">
+    <!-- Main container with responsive padding and max width -->
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+      <!-- Page Header Section -->
+      <div class="text-center mb-8">
+        <!-- Heart icon in circular background -->
+        <div
+          class="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-4"
+        >
+          <svg
+            class="w-8 h-8 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            ></path>
+          </svg>
+        </div>
+        <!-- Page title and description -->
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">
+          Create Your Pet Profile
+        </h1>
+        <p class="text-gray-600">
+          Set up your furry friend's profile with all the important details
+        </p>
+      </div>
+
+      <!-- Main Form Container -->
+      <form
+        id="petProfileForm"
+        class="bg-white rounded-2xl shadow-xl p-8 space-y-8"
+      >
+        <!-- Pet Photo Upload Section -->
+        <div class="text-center">
+          <div class="relative inline-block">
+            <!-- Photo preview container with dashed border -->
+            <div
+              id="photoPreview"
+              class="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center border-4 border-dashed border-gray-300 hover:border-primary transition-colors cursor-pointer"
+            >
+              <!-- Plus icon shown when no photo is uploaded -->
+              <svg
+                class="w-12 h-12 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                ></path>
+              </svg>
+            </div>
+            <!-- Hidden file input for photo upload -->
+            <input type="file" id="petPhoto" accept="image/*" class="hidden" />
+            <!-- Camera button positioned at bottom-right of photo preview -->
+            <button
+              type="button"
+              onclick="document.getElementById('petPhoto').click()"
+              class="absolute -bottom-2 -right-2 bg-primary text-white rounded-full p-2 hover:bg-purple-700 transition-colors"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <p class="text-sm text-gray-500 mt-2">
+            Click to upload your pet's photo
+          </p>
+        </div>
+
+        <!-- Basic Pet Information Section -->
+        <!-- Two-column grid layout on medium screens and larger -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Pet Name Field (Required) -->
+          <div>
+            <label
+              for="petName"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Pet Name *</label
+            >
+            <input
+              type="text"
+              id="petName"
+              name="petName"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              placeholder="Enter your pet's name"
+            />
+            <!-- Error message container (hidden by default) -->
+            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+          </div>
+
+          <!-- Pet Type Dropdown (Required) -->
+          <div>
+            <label
+              for="petType"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Pet Type *</label
+            >
+            <select
+              id="petType"
+              name="petType"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            >
+              <option value="">Select pet type</option>
+              <option value="dog">Dog</option>
+              <option value="cat">Cat</option>
+              <option value="bird">Bird</option>
+              <option value="rabbit">Rabbit</option>
+              <option value="hamster">Hamster</option>
+              <option value="fish">Fish</option>
+              <option value="reptile">Reptile</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+          </div>
+        </div>
+
+        <!-- Breed and Gender Row -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Breed Field (Optional) -->
+          <div>
+            <label
+              for="breed"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Breed</label
+            >
+            <input
+              type="text"
+              id="breed"
+              name="breed"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              placeholder="Enter breed (optional)"
+            />
+          </div>
+
+          <!-- Gender Dropdown -->
+          <div>
+            <label
+              for="gender"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Gender</label
+            >
+            <select
+              id="gender"
+              name="gender"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            >
+              <option value="">Select gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Age and Weight Row (Three columns) -->
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Age Field (Required) -->
+          <div>
+            <label
+              for="age"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Age *</label
+            >
+            <input
+              type="number"
+              id="age"
+              name="age"
+              required
+              min="0"
+              max="50"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              placeholder="Age"
+            />
+            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+          </div>
+
+          <!-- Age Unit Dropdown -->
+          <div>
+            <label
+              for="ageUnit"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Age Unit</label
+            >
+            <select
+              id="ageUnit"
+              name="ageUnit"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            >
+              <option value="years">Years</option>
+              <option value="months">Months</option>
+              <option value="weeks">Weeks</option>
+            </select>
+          </div>
+
+          <!-- Weight Field -->
+          <div>
+            <label
+              for="weight"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Weight (lbs)</label
+            >
+            <input
+              type="number"
+              id="weight"
+              name="weight"
+              min="0"
+              step="0.1"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              placeholder="Weight"
+            />
+          </div>
+        </div>
+
+        <!-- Pet Description Section -->
+        <div>
+          <label
+            for="description"
+            class="block text-sm font-medium text-gray-700 mb-2"
+            >Description</label
+          >
+          <!-- Textarea with resize disabled -->
+          <textarea
+            id="description"
+            name="description"
+            rows="4"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+            placeholder="Tell us about your pet's personality, habits, or any special notes..."
+          ></textarea>
+          <!-- Character counter display -->
+          <div class="text-right text-sm text-gray-500 mt-1">
+            <span id="charCount">0</span>/500 characters
+          </div>
+        </div>
+
+        <!-- Medical Information Section -->
+        <!-- Light gray background to distinguish this section -->
+        <div class="bg-gray-50 rounded-lg p-6">
+          <!-- Section header with medical icon -->
+          <h3
+            class="text-lg font-semibold text-gray-800 mb-4 flex items-center"
+          >
+            <svg
+              class="w-5 h-5 mr-2 text-red-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              ></path>
+            </svg>
+            Medical Information
+          </h3>
+
+          <!-- Vaccination and Spay/Neuter Status Row -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Vaccination Status Dropdown -->
+            <div>
+              <label
+                for="vaccinated"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Vaccination Status</label
+              >
+              <select
+                id="vaccinated"
+                name="vaccinated"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              >
+                <option value="">Select status</option>
+                <option value="up-to-date">Up to date</option>
+                <option value="partial">Partially vaccinated</option>
+                <option value="not-vaccinated">Not vaccinated</option>
+                <option value="unknown">Unknown</option>
+              </select>
+            </div>
+
+            <!-- Spayed/Neutered Status Dropdown -->
+            <div>
+              <label
+                for="spayedNeutered"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Spayed/Neutered</label
+              >
+              <select
+                id="spayedNeutered"
+                name="spayedNeutered"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              >
+                <option value="">Select status</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+                <option value="unknown">Unknown</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Allergies and Medical Conditions Textarea -->
+          <div class="mt-4">
+            <label
+              for="allergies"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Allergies or Medical Conditions</label
+            >
+            <textarea
+              id="allergies"
+              name="allergies"
+              rows="3"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+              placeholder="List any known allergies, medical conditions, or medications..."
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Owner Information Section -->
+        <!-- Light blue background to distinguish this section -->
+        <div class="bg-blue-50 rounded-lg p-6">
+          <!-- Section header with user icon -->
+          <h3
+            class="text-lg font-semibold text-gray-800 mb-4 flex items-center"
+          >
+            <svg
+              class="w-5 h-5 mr-2 text-blue-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              ></path>
+            </svg>
+            Owner Information
+          </h3>
+
+          <!-- Owner Name and Phone Row -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Owner Name Field (Required) -->
+            <div>
+              <label
+                for="ownerName"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Owner Name *</label
+              >
+              <input
+                type="text"
+                id="ownerName"
+                name="ownerName"
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                placeholder="Your full name"
+              />
+              <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+            </div>
+
+            <!-- Owner Phone Field (Required) with auto-formatting -->
+            <div>
+              <label
+                for="ownerPhone"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Phone Number *</label
+              >
+              <input
+                type="tel"
+                id="ownerPhone"
+                name="ownerPhone"
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                placeholder="(555) 123-4567"
+              />
+              <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+            </div>
+          </div>
+
+          <!-- Owner Email Field (Required) -->
+          <div class="mt-4">
+            <label
+              for="ownerEmail"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Email Address *</label
+            >
+            <input
+              type="email"
+              id="ownerEmail"
+              name="ownerEmail"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              placeholder="your.email@example.com"
+            />
+            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+          </div>
+
+          <!-- Emergency Contact Field (Optional) -->
+          <div class="mt-4">
+            <label
+              for="emergencyContact"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Emergency Contact</label
+            >
+            <input
+              type="text"
+              id="emergencyContact"
+              name="emergencyContact"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              placeholder="Emergency contact name and phone"
+            />
+          </div>
+        </div>
+
+        <!-- Submit Button Section -->
+        <div class="flex justify-center pt-6">
+          <!-- Gradient submit button with hover effects -->
+          <button
+            type="submit"
+            class="bg-gradient-to-r from-primary to-secondary text-white font-semibold py-4 px-8 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center space-x-2"
+          >
+            <!-- Checkmark icon -->
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"
+              ></path>
+            </svg>
+            <span>Create Pet Profile</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Success Modal (Hidden by default) -->
+    <div
+      id="successModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+    >
+      <!-- Modal content container -->
+      <div class="bg-white rounded-2xl p-8 max-w-md mx-4 text-center">
+        <!-- Success icon with green background -->
+        <div
+          class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+        >
+          <svg
+            class="w-8 h-8 text-green-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            ></path>
+          </svg>
+        </div>
+        <!-- Success message -->
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">
+          Profile Created!
+        </h3>
+        <p class="text-gray-600 mb-6">
+          Your pet's profile has been successfully created.
+        </p>
+        <!-- Close button -->
+        <button
+          onclick="closeModal()"
+          class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+    <!-- Link to your JavaScript file -->
+    <script src="setup.js"></script>
+  </body>
+</html>
